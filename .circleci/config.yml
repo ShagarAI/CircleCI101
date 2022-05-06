@@ -16,15 +16,15 @@ jobs:
           chmod +x sayHello.sh
       - run: ./sayHello.sh
   print_world:
-      docker:
-        - image: circleci/node:13.8.0
-      steps:
-        - run:
-            name: "Say World"
-            echo '#!/bin/bash' > sayWorld.sh
-            echo 'echo World!' >> sayWorld.sh
-            chmod +x sayWorld.sh
-        - run: ./sayWorld.sh
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "Say World"
+          echo '#!/bin/bash' > sayWorld.sh
+          echo 'echo World!' >> sayWorld.sh
+          chmod +x sayWorld.sh
+      - run: ./sayWorld.sh
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

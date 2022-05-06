@@ -10,7 +10,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run:
-          name: "Say Hello"
+         # name: "Say Hello"
           echo '#!/bin/bash' > sayHello.sh
           echo 'echo Hello ' >> sayHello.sh
           chmod +x sayHello.sh
@@ -20,7 +20,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run:
-          name: "Say World"
+         # name: "Say World"
           echo '#!/bin/bash' > sayWorld.sh
           echo 'echo World!' >> sayWorld.sh
           chmod +x sayWorld.sh

@@ -10,21 +10,15 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run:
-         # name: "Say Hello"
-          echo '#!/bin/bash' > sayHello.sh
-          echo 'echo Hello ' >> sayHello.sh
-          chmod +x sayHello.sh
-      - run: ./sayHello.sh
+          name: "Say Hello"
+          echo 'Hello '
   print_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run:
-         # name: "Say World"
-          echo '#!/bin/bash' > sayWorld.sh
-          echo 'echo World!' >> sayWorld.sh
-          chmod +x sayWorld.sh
-      - run: ./sayWorld.sh
+          name: "Say World"
+          echo 'World!'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

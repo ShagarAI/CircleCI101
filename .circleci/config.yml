@@ -2,6 +2,19 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    description: "Should Print $CIRCLE_WORKFLOW_ID"
+    parameters:
+      to:
+        type: string
+        default: "N/A"
+    steps:
+      - run: echo << parameters.to >>
+
+docker: &docker_info
+  - image: cimg/base:stable
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -16,9 +29,10 @@ jobs:
   #  steps:
   #    - run: echo World!
   print_name:
-    docker:
+    <<: *docker
+  #  docker:
   #    - image: circleci/node:13.8.0
-      - image: cimg/base:stable
+  #    - image: cimg/base:stable
     steps:
       - run:
           name: "Say my name"
@@ -26,8 +40,7 @@ jobs:
             echo $MY_ENV_VAR
 
   save_hello_world_output:
-    docker:
-      - image: cimg/base:stable
+    <<: *docker
     steps:
       - run:
           name: "Save Hello World Output"
@@ -40,8 +53,7 @@ jobs:
             - output.txt
       
   print_hello_world_output:
-    docker:
-      - image: cimg/base:stable
+    <<: *docker
     steps:
       - attach_workspace:
           at: ./
@@ -50,6 +62,8 @@ jobs:
           name: "Echo Hello World Output"
           command: |
             cat ./output.txt
+      - print_pipeline_id:
+          to: $CIRCLECI_WORKFLOW_ID
 
 
 # Invoke jobs via workflows

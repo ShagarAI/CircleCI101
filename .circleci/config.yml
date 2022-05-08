@@ -6,11 +6,23 @@ commands:
   print_pipeline_id:
     description: "Should Print $CIRCLE_WORKFLOW_ID"
     parameters:
-      to:
+      #to:
+      id:
         type: string
         default: "N/A"
     steps:
-      - run: echo << parameters.to >>
+      #- run: echo << parameters.to >>
+      - run: echo << parameters.id >>
+      ### Or it can be done directly by
+      ### 1) Omitting the previous parameters section
+      ### 2) Adding the following to the steps section
+      ### - run: echo ${CIRCLE_WORKFLOW_ID}
+      ### 3) Referencing only the command name under the job's steps section withOut reference to the id: 
+      ##### Or
+      ##### It's also possible to reference the pipeline variable under the job's steps instead of the environment variable
+      ##### That's by incorporating the parameters section under commands as previously illustrated, however
+      ##### Under the the job we add the following under the command reference:
+      ##### id: << pipeline.id >>
 
 docker_info: &docker_info
   docker:
@@ -64,7 +76,7 @@ jobs:
           command: |
             cat ./output.txt
       - print_pipeline_id:
-          to: $CIRCLE_WORKFLOW_ID
+          id: $CIRCLE_WORKFLOW_ID
 
 
 # Invoke jobs via workflows

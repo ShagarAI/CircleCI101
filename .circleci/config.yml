@@ -12,8 +12,9 @@ commands:
     steps:
       - run: echo << parameters.to >>
 
-docker: &docker_info
-  - image: cimg/base:stable
+docker_info: &docker_info
+  docker:
+    - image: cimg/base:stable
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -29,7 +30,7 @@ jobs:
   #  steps:
   #    - run: echo World!
   print_name:
-    <<: *docker
+    <<: *docker_info
   #  docker:
   #    - image: circleci/node:13.8.0
   #    - image: cimg/base:stable
@@ -40,7 +41,7 @@ jobs:
             echo $MY_ENV_VAR
 
   save_hello_world_output:
-    <<: *docker
+    <<: *docker_info
     steps:
       - run:
           name: "Save Hello World Output"
@@ -53,7 +54,7 @@ jobs:
             - output.txt
       
   print_hello_world_output:
-    <<: *docker
+    <<: *docker_info
     steps:
       - attach_workspace:
           at: ./

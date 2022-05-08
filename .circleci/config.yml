@@ -64,7 +64,7 @@ jobs:
           command: |
             cat ./output.txt
       - print_pipeline_id:
-          to: $CIRCLECI_WORKFLOW_ID
+          to: $CIRCLE_WORKFLOW_ID
 
 
 # Invoke jobs via workflows
